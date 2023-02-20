@@ -44,6 +44,7 @@ void input(int &p, int process[], int arrival[], int burst[]) {
 
 // Function to implement FCFS scheduling
 void fcfs(int p, int process[], int arrival[], int burst[], int wait[], int turnaround[], int completion[]) {
+    
     wait[0] = 0;
     turnaround[0] = burst[0];
     completion[0] = arrival[0] + burst[0];
@@ -64,6 +65,19 @@ void fcfs(int p, int process[], int arrival[], int burst[], int wait[], int turn
         
     }
 }
+void throughput_and_utilization(int p, int burst[], int completion[], float& throughput, float& utilization) {
+    float total_burst_time = 0;
+    float total_execution_time = 0;
+
+    for (int i = 0; i < p; i++) {
+        total_burst_time += burst[i];
+        total_execution_time += completion[i];
+    }
+
+    throughput = p / total_execution_time;
+    utilization = total_burst_time / total_execution_time;
+}
+
 
 int main() {
     int p;  // Number of processes
@@ -104,7 +118,11 @@ int main() {
 
     cout << "\nAverage Waiting Time: " << avg_wait << endl;
     cout << "Average Turnaround Time: " << avg_turnaround << endl;
-     
+    float throughput,utilization;
+    throughput_and_utilization(p, burst, completion, throughput,  utilization);
+    
+     cout << "\nThroughput : " << throughput << endl;
+    cout << "CPU Utilization : " << utilization << endl;
     printGanttChart(p,process,completion);
     return 0;
 }
