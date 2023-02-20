@@ -3,6 +3,27 @@
 
 using namespace std;
 
+void printGanttChart(int p, int process[], int completion[]) {
+    cout << "\nGantt Chart:\n";
+    for (int i = 0; i < p; i++) {
+        cout << "+--------";
+    }
+    cout << "+\n";
+    for (int i = 0; i < p; i++) {
+        cout << "  | P" << process[i] << "   ";
+    }
+    cout << "|\n";
+    for (int i = 0; i < p; i++) {
+        cout << "+--------";
+    }
+    cout << "+\n";
+    cout << "0       ";
+    for (int i = 0; i < p; i++) {
+        cout << completion[i] << "       ";
+    }
+    cout << endl;
+}
+
 // Function to input process information
 void input(int &p, int process[], int arrival[], int burst[]) {
     cout << "Enter the number of processes: ";
@@ -83,6 +104,7 @@ int main() {
 
     cout << "\nAverage Waiting Time: " << avg_wait << endl;
     cout << "Average Turnaround Time: " << avg_turnaround << endl;
-
+     
+    printGanttChart(p,process,completion);
     return 0;
 }
